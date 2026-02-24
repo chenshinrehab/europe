@@ -295,24 +295,31 @@ export default function Home() {
                     <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                     <div className="flex flex-col md:flex-row">
                       <div className="md:w-1/2 relative">
-                          <div className="h-full w-full min-h-[320px] md:min-h-[550px] relative overflow-hidden">
-                              <Image 
-                                src="/images/main/a.webp"
-                                alt="新竹復健科推薦-林羿辰醫師-台大雙專科院長" 
-                                fill
-                                priority
-                                loading="eager"
-                                fetchPriority="high"
-                                className="object-cover object-center md:object-bottom group-hover:scale-105 transition-all duration-700"
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                              />
-                          </div>
+                      <div className="h-full w-full min-h-[320px] md:min-h-[550px] relative overflow-hidden group">
+  <Link href="/about/doctors" className="block h-full w-full cursor-pointer">
+    <Image 
+      src="/images/main/a.webp"
+      alt="新竹復健科推薦-林羿辰醫師-台大雙專科院長" 
+      fill
+      priority
+      loading="eager"
+      fetchPriority="high"
+      className="object-cover object-center md:object-bottom group-hover:scale-105 transition-all duration-700"
+      sizes="(max-width: 768px) 100vw, 50vw"
+    />
+  </Link>
+</div>
                       </div>
 
                       <div className="md:w-1/2 p-8 md:p-8 flex flex-col justify-center relative z-10">
-                          <h1 className="text-5xl md:text-6xl font-bold font-sans text-white mb-2 tracking-wide">
-                            林羿辰 <span className="text-cyan-400">醫師</span>
-                          </h1>
+                      <h1 className="text-5xl md:text-6xl font-bold font-sans text-white mb-2 tracking-wide">
+  <Link 
+    href="/about/doctors" 
+    className="hover:text-cyan-300 transition-all duration-300 cursor-pointer group"
+  >
+    林羿辰 <span className="text-cyan-400 group-hover:text-cyan-300">醫師</span>
+  </Link>
+</h1>
                           <p className="text-2xl text-slate-300 mb-6 font-medium">運動教練醫師 | 骨科復健專家</p>
                           <h2 className="text-2xl md:text-3xl text-cyan-400 font-medium mb-8 border-l-4 border-cyan-500 pl-4 flex flex-wrap items-center gap-2">
                             新竹增生療法專家 <span className="text-xl md:text-2xl text-slate-400 font-normal">| 兒童早療評估</span>

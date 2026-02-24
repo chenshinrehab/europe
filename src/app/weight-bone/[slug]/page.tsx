@@ -16,6 +16,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dryichen.com.t
 interface PageProps {
   params: Promise<{
     slug: string
+
   }>
 }
 
@@ -129,6 +130,46 @@ export default async function WeightBoneDetailPage({ params }: PageProps) {
       medicalSpecialty: [
         'Physical Medicine and Rehabilitation',
         'SportsMedicine'
+      ],
+      sameAs: [
+        'https://ma.mohw.gov.tw/Accessibility/DOCSearch/DOCBasicData?DOC_SEQ=2bJQOvvE5EX3U6eK7eSvhw%253D%253D',
+        'https://www.pmr.org.tw/associator/associator-all.asp?w/',
+        'https://www.toa1997.org.tw/orthopedist/?n=%E6%9E%97%E7%BE%BF%E8%BE%B0&h=&c=&a='
+      ],
+      hasCredential: [
+        // 1. 衛生福利部 - 醫師執照
+        {
+          '@type': 'EducationalOccupationalCredential',
+          'name': '醫事人員執業資格',
+          'credentialCategory': '醫師證書',
+          'url': 'https://ma.mohw.gov.tw/Accessibility/DOCSearch/DOCBasicData?DOC_SEQ=2bJQOvvE5EX3U6eK7eSvhw%253D%253D',
+          'recognizedBy': {
+            '@type': 'Organization',
+            'name': '中華民國衛生福利部'
+          }
+        },
+        // 2. 復健醫學會 - 復健專科
+        {
+          '@type': 'EducationalOccupationalCredential',
+          'name': '復健科專科醫師資格',
+          'credentialCategory': '復健科專科醫師證書',
+          'url': 'https://www.pmr.org.tw/associator/associator-all.asp?w/',
+          'recognizedBy': {
+            '@type': 'Organization',
+            'name': '台灣復健醫學會'
+          }
+        },
+        // 3. 骨質疏鬆症學會 - 骨鬆專科 (新增)
+        {
+          '@type': 'EducationalOccupationalCredential',
+          'name': '骨質疏鬆症學會專科醫師資格',
+          'credentialCategory': '骨質疏鬆症學會專科醫師證書',
+          'url': 'https://www.toa1997.org.tw/orthopedist/?n=%E6%9E%97%E7%BE%BF%E8%BE%B0&h=&c=&a=',
+          'recognizedBy': {
+            '@type': 'Organization',
+            'name': '中華民國骨質疏鬆症學會'
+          }
+        }
       ]
     },
     // 關鍵修改：將完整的 areaServed 移至最外層或 location 內（建議最外層）
@@ -282,7 +323,38 @@ export default async function WeightBoneDetailPage({ params }: PageProps) {
                   
                   <div>
                     <h1 className="text-3xl md:text-5xl font-bold font-sans text-white mb-3 tracking-wide leading-tight">{program.title}</h1>
-                    {program.subtitle && <h2 className="text-xl text-cyan-400 font-medium tracking-wide">{program.subtitle}</h2>}
+                    {program.subtitle && (
+  <div className="flex flex-col md:flex-row md:items-end justify-between gap-2">
+    <h2 className="text-lg text-cyan-400 font-medium">
+      {program.subtitle}
+    </h2>
+    
+    <div className="text-slate-400 text-xs md:text-sm font-normal flex flex-wrap items-center gap-x-3 gap-y-1">
+      <span className="flex items-center">
+        撰文者：
+        <Link 
+          href="/about/doctors" 
+          className="text-slate-300 hover:text-cyan-400 underline underline-offset-4 decoration-slate-600 transition-colors cursor-pointer"
+        >
+          林羿辰醫師
+        </Link>
+      </span>
+      <span className="hidden md:inline text-slate-600">|</span>
+      <span className="flex items-center">
+        最後更新日期：
+        {/* 修改這裡：將 data 改成 program */}
+        {program.lastModified ? (
+          <time dateTime={program.lastModified} itemProp="dateModified">
+            {program.lastModified}
+          </time>
+        ) : (
+          "2026-02-22"
+        )}
+      </span>
+    </div>
+  </div>
+)}
+
                   </div>
                 </div>
 
@@ -444,19 +516,67 @@ export default async function WeightBoneDetailPage({ params }: PageProps) {
                   </section>
                 )}
 
-              {/* 作者權威聲明 */}
-              <div className="mt-0 pt-0 px-4 md:px-10 border-t border-slate-700/40 text-right">
-                <div className="inline-block text-slate-500 text-sm py-6">
-                  <p>
-                    <span className="mr-2">撰文者 :</span>
-                    <span className="font-medium text-slate-400">復健專科 宸新復健科院長 林羿辰醫師</span>
-                  </p>
-                  <p>
-                    <span className="mr-2">資料來源 :</span>
-                    <span className="font-medium text-slate-400">減重與兒童醫學會</span>
-                  </p>
-                </div>
-              </div>
+                {/* 修正 4：醫師資歷方塊 (將 animate-on-scroll 移除或改為即時顯示確保穩定性) */}
+                
+                  <div className="mt-8 mb-10">
+                    <div className="bg-slate-800/40 backdrop-blur border border-slate-700 rounded-2xl p-6 md:p-8 shadow-lg relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+                      
+                      <div className="flex flex-col md:flex-row items-center md:items-start gap-6 relative z-10">
+                        <div className="flex-grow text-center md:text-left">
+                          <div className="mb-2">
+                          <h3 className="text-xl font-bold text-white flex flex-col md:flex-row items-center gap-2">
+  本文由 
+  <Link 
+    href="/about/doctors"
+    className="text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer underline underline-offset-4 decoration-cyan-900/50 hover:decoration-cyan-400"
+  >
+    林羿辰醫師
+  </Link> 
+  撰寫與醫學審閱
+  <span className="hidden md:inline-block text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30 font-normal uppercase tracking-wider">
+    Verified Expert
+  </span>
+</h3>
+                            <p className="text-sm text-slate-400 mt-1 font-medium">宸新復健科診所院長 / 復健科專科醫師</p>
+                          </div>
+                          
+                          <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6">
+                            現任宸新復健科診所院長。畢業於國立台灣大學醫學系，擁有復健科、骨質疏鬆雙專科醫師資歷，專精於精準超音波導引注射治療、增生療法與各類運動傷害。林醫師具備豐富臨床經驗，致力於將醫學實證應用於病患康復。
+                          </p>
+
+                          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-5 border-t border-slate-700/50">
+                            <Link 
+                              href="/about/doctors" 
+                              className="text-cyan-400 hover:text-cyan-300 text-sm font-bold flex items-center group transition-colors cursor-pointer"
+                            >
+                              <i className="fa-solid fa-id-card-clip mr-2 text-lg"></i>
+                              <span className="border-b border-cyan-500/30 group-hover:border-cyan-300">👉 查看更多醫師資歷、證照認證與學術論文</span>
+                              <i className="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </Link>
+                            
+                            <div className="flex flex-col items-end gap-1 text-[10px] md:text-xs text-slate-500">
+                              <div className="flex items-center gap-3">
+                                <span className="flex items-center"><i className="fa-solid fa-check-double mr-1 text-cyan-500/70"></i> 專家審閱完成</span>
+                                <span className="flex items-center"><i className="fa-solid fa-database mr-1 text-cyan-500/70"></i> 來源：醫學實證與專科臨床</span>
+                              </div>
+                              <div className="text-gray-500">
+                                最後更新日期：
+                                {program.lastModified ? (
+                                  <time dateTime={program.lastModified} itemProp="dateModified">
+                                    {program.lastModified}
+                                  </time>
+                                ) : (
+                                  "2026-02-22"
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
 
               {/* 底部分享區塊 */}
               <div className="bg-slate-900/80 p-8 md:p-12 border-t border-slate-700 text-center relative overflow-hidden">

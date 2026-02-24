@@ -332,6 +332,7 @@ export default function DoctorsPage() {
     <div className="flex overflow-x-auto gap-6 pb-4 scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-slate-800 snap-x items-end">
       {[
         { src: '/images/doctor/certificate/certificate-1.webp', alt: '林羿辰醫師 - 中華民國復健科專科醫師證書', label: '復健科專科醫師證書', isPortrait: true },
+        { src: '/images/doctor/certificate/certificate-7.webp', alt: '林羿辰醫師 - 中華民國骨鬆專科醫師證書', label: '骨鬆專科醫師證書', isPortrait: false},
         { src: '/images/doctor/certificate/certificate-2.webp', alt: '林羿辰醫師 - 國立台灣大學醫學系成績優良獎狀', label: '台大醫學成績優良獎', isPortrait: false },
         { src: '/images/doctor/certificate/certificate-3.webp', alt: '林羿辰醫師 - 美國運動醫學會 ACE-CPT 國際私人教練證照', label: 'ACE-CPT 國際教練證照', isPortrait: false },
         { src: '/images/doctor/certificate/certificate-4.webp', alt: '林羿辰醫師 - 國立台灣大學醫學系畢業證書', label: '台大醫學系畢業證書', isPortrait: false },
@@ -411,36 +412,36 @@ export default function DoctorsPage() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 w-full lg:w-auto">
                 {/* 連結 1 */}
                 <a 
-                    href="https://ma.mohw.gov.tw/Accessibility/DOCSearch/DOCBasicData?DOC_SEQ=2bJQOvvE5EX3U6eK7eSvhw%253D%253D" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center justify-center px-8 py-3 rounded-lg bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 border border-slate-600 transition-all font-medium group min-w-[220px]"
-                >
-                    <i className="fa-solid fa-hospital-user text-lg mr-3 group-hover:scale-110 transition-transform"></i>
-                    <span className="text-sm">衛生福利部查詢</span>
-                </a>
+    href="https://ma.mohw.gov.tw/Accessibility/DOCSearch/DOCBasicData?DOC_SEQ=2bJQOvvE5EX3U6eK7eSvhw%3D%3D" 
+    target="_blank" 
+    rel="noopener" 
+    className="flex items-center justify-center px-8 py-3 rounded-lg bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 border border-slate-600 transition-all font-medium group min-w-[220px]"
+>
+    <i className="fa-solid fa-hospital-user text-lg mr-3 group-hover:scale-110 transition-transform"></i>
+    <span className="text-sm">衛生福利部查詢</span>
+</a>
 
                 {/* 連結 2 */}
                 <a 
-                    href="https://www.pmr.org.tw/associator/associator-all.asp?w/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center justify-center px-8 py-3 rounded-lg bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 border border-slate-600 transition-all font-medium group min-w-[220px]"
-                >
-                    <i className="fa-solid fa-user-doctor text-lg mr-3 group-hover:scale-110 transition-transform"></i>
-                    <span className="text-sm">復健醫學會查詢</span>
-                </a>
+    href="https://www.pmr.org.tw/associator/associator-all.asp?w/" 
+    target="_blank" 
+    rel="noopener" 
+    className="flex items-center justify-center px-8 py-3 rounded-lg bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 border border-slate-600 transition-all font-medium group min-w-[220px]"
+>
+    <i className="fa-solid fa-user-doctor text-lg mr-3 group-hover:scale-110 transition-transform"></i>
+    <span className="text-sm">復健醫學會查詢</span>
+</a>
 
    {/* 連結 2 */}
-                                <a 
-                    href="https://www.toa1997.org.tw/orthopedist/?n=%E6%9E%97%E7%BE%BF%E8%BE%B0&h=&c=&a=" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center justify-center px-8 py-3 rounded-lg bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 border border-slate-600 transition-all font-medium group min-w-[220px]"
-                >
-                    <i className="fa-solid fa-user-doctor text-lg mr-3 group-hover:scale-110 transition-transform"></i>
-                    <span className="text-sm">骨鬆醫學會查詢</span>
-                </a>
+   <a 
+    href="https://www.toa1997.org.tw/orthopedist/?n=%E6%9E%97%E7%BE%BF%E8%BE%B0&h=&c=&a=" 
+    target="_blank" 
+    rel="noopener" 
+    className="flex items-center justify-center px-8 py-3 rounded-lg bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 border border-slate-600 transition-all font-medium group min-w-[220px]"
+>
+    <i className="fa-solid fa-user-doctor text-lg mr-3 group-hover:scale-110 transition-transform"></i>
+    <span className="text-sm">骨鬆醫學會查詢</span>
+</a>
             </div>
             
         </div>
@@ -459,14 +460,14 @@ export default function DoctorsPage() {
             </div>
             
             <a 
-                href="https://pubmed.ncbi.nlm.nih.gov/33327331/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center px-6 py-2.5 bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 rounded-lg text-sm border border-slate-600 transition-all font-medium group whitespace-nowrap ml-0 md:ml-6"
-            >
-                <i className="fa-solid fa-up-right-from-square mr-2 group-hover:scale-110"></i> 
-                前往 PubMed 檢視論文
-            </a>
+    href="https://pubmed.ncbi.nlm.nih.gov/33327331/" 
+    target="_blank" 
+    rel="noopener" 
+    className="inline-flex items-center px-6 py-2.5 bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 rounded-lg text-sm border border-slate-600 transition-all font-medium group whitespace-nowrap ml-0 md:ml-6"
+>
+    <i className="fa-solid fa-up-right-from-square mr-2 group-hover:scale-110"></i> 
+    前往 PubMed 檢視論文
+</a>
         </h3>
     </div>
 </section>

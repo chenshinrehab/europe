@@ -213,10 +213,19 @@ export default function ArticleDetail({ data, backLink, currentUrl, layoutStyle,
                       <div className="flex flex-col md:flex-row items-center md:items-start gap-6 relative z-10">
                         <div className="flex-grow text-center md:text-left">
                           <div className="mb-2">
-                            <h3 className="text-xl font-bold text-white flex flex-col md:flex-row items-center gap-2">
-                              本文由 <span className="text-cyan-400">林羿辰醫師</span> 撰寫與醫學審閱
-                              <span className="hidden md:inline-block text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30 font-normal uppercase tracking-wider">Verified Expert</span>
-                            </h3>
+                          <h3 className="text-xl font-bold text-white flex flex-col md:flex-row items-center gap-2">
+  本文由 
+  <Link 
+    href="/about/doctors"
+    className="text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer underline underline-offset-4 decoration-cyan-900/50 hover:decoration-cyan-400"
+  >
+    林羿辰醫師
+  </Link> 
+  撰寫與醫學審閱
+  <span className="hidden md:inline-block text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30 font-normal uppercase tracking-wider">
+    Verified Expert
+  </span>
+</h3>
                             <p className="text-sm text-slate-400 mt-1 font-medium">宸新復健科診所院長 / 復健科專科醫師</p>
                           </div>
                           
