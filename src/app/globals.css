@@ -3,39 +3,43 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 15, 23, 42; 
+  --background-rgb: 255, 255, 255; 
 }
 
-/* 1. 顯式定義標題樣式，解決 H1UserAgentFontSizeInSection 警告 */
 @layer base {
   h1 {
-    @apply text-4xl font-bold mb-4; /* 這裡可以使用你喜歡的 Tailwind class */
-    font-size: 2.25rem; /* 顯式指定字體大小 */
+    @apply text-4xl font-bold mb-4;
+    font-size: 2.25rem !important; 
   }
   h2 {
     @apply text-3xl font-bold mb-3;
-    font-size: 1.875rem;
+    font-size: 1.875rem !important;
   }
   h3 {
     @apply text-2xl font-bold mb-2;
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
   }
-  /* 即使標題在 section, article 內，也強制維持設定的大小 */
-  section h1, article h1, nav h1, aside h1 {
-    font-size: 2.25rem;
+  
+  body {
+    color: rgb(var(--foreground-rgb));
+    background-color: rgb(var(--background-rgb)) !important;
+    @apply antialiased;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
-}
-
-/* 確保移動端底部導航有足夠空間 */
 @media (max-width: 768px) {
   body {
     padding-bottom: 0;
+    /* 確保手機滑動時不會露出底層背景色 */
+    overscroll-behavior-y: none;
   }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

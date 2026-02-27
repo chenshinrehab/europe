@@ -1,224 +1,107 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import FooterSearch from '@/components/FooterSearch'
-import ScrollAnimation from '@/components/ScrollAnimation'
-
-// ✨ 僅載入本頁面有用到的小圖示，達到極速載入 (Tree Shaking)
-import { 
-  FaFacebookF, 
-  FaInstagram, 
-  FaYoutube, 
-  FaPhoneAlt, 
-  FaCalendarCheck 
-} from "react-icons/fa";
-import { SiThreads } from "react-icons/si";
+import { FaPhoneAlt } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 
 export default function Footer() {
-  const [visitCount, setVisitCount] = useState<string>('---,---')
-
-  // =================================================================
-  // 瀏覽人數計算邏輯
-  // =================================================================
-  useEffect(() => {
-    const BASE_VIEWS = 125; 
-    const VIEWS_PER_HOUR = 9;
-    const ANCHOR_DATE = new Date('2026-01-10T00:00:00').getTime();
-
-    const calculateViews = () => {
-      const now = Date.now();
-      const timeDiff = now - ANCHOR_DATE;
-      const hoursPassed = timeDiff / (1000 * 60 * 60);
-      const currentViews = Math.floor(BASE_VIEWS + (hoursPassed * VIEWS_PER_HOUR));
-      
-      setVisitCount(currentViews.toLocaleString());
-    };
-
-    calculateViews();
-    const intervalId = setInterval(calculateViews, 10000);
-
-    return () => clearInterval(intervalId);
-  }, [])
+  const navItems = [
+    { name: '派大星', path: '/a' },
+    { name: '小呱', path: '/b' },
+    { name: '蟹堡王', path: '/c' },
+    { name: '美味蟹堡', path: '/d' },
+  ]
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-800 pt-10 pb-6 mt-auto">
-      
-      {/* 載入滾動動畫組件 */}
-      <ScrollAnimation />
-
+    <footer className="bg-white text-slate-900 border-t border-slate-100 pt-10 pb-8 mt-auto">
       <div className="container mx-auto px-4">
 
-        {/* =========================================
-            Part 1: 快速導覽 (圖片區)
-           ========================================= */}
-        <div className="mb-8">
-            <h3 className="text-2xl font-bold font-sans text-white text-center mb-6 tracking-wide">
-                <span className="text-cyan-400">快速</span>導覽
-            </h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-2 max-w-6xl mx-auto">
-                
-                {/* 1. 關於我們 */}
-                <Link href="/about" className="animate-on-scroll delay-100 group rounded-xl relative h-28 md:h-36 overflow-hidden shadow-lg border border-slate-700 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Image 
-                    src="/images/icons/a.webp" 
-                    alt="關於我們 - 宸新復健科" 
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent flex items-end p-3">
-                      <span className="text-white font-bold text-sm md:text-base group-hover:text-cyan-400 transition-colors relative z-10">關於我們</span>
-                  </div>
-                </Link>
-
-                {/* 2. 治療方式 */}
-                <Link href="/treatments" className="animate-on-scroll delay-200 group rounded-xl relative h-28 md:h-36 overflow-hidden shadow-lg border border-slate-700 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Image 
-                    src="/images/icons/b.webp" 
-                    alt="治療方式 - PRP與震波" 
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent flex items-end p-3">
-                        <span className="text-white font-bold text-sm md:text-base group-hover:text-cyan-400 transition-colors relative z-10">治療方式</span>
-                    </div>
-                </Link>
-
-                {/* 3. 減重與骨齡 */}
-                <Link href="/weight-bone" className="animate-on-scroll delay-300 group rounded-xl relative h-28 md:h-36 overflow-hidden shadow-lg border border-slate-700 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Image 
-                    src="/images/icons/c.webp" 
-                    alt="減重與骨齡門診" 
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent flex items-end p-3">
-                        <span className="text-white font-bold text-sm md:text-base group-hover:text-cyan-400 transition-colors relative z-10">減重與骨齡</span>
-                    </div>
-                </Link>
-
-                {/* 4. 疾病衛教 */}
-                <Link href="/diseases" className="animate-on-scroll delay-400 group rounded-xl relative h-28 md:h-36 overflow-hidden shadow-lg border border-slate-700 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all">
-                  <Image 
-                    src="/images/icons/d.webp" 
-                    alt="疾病衛教文章" 
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent flex items-end p-3">
-                        <span className="text-white font-bold text-sm md:text-base group-hover:text-cyan-400 transition-colors relative z-10">疾病衛教</span>
-                    </div>
-                </Link>
-            </div>
-        </div>
-
-        {/* =========================================
-            Part 2: 站內搜尋
-           ========================================= */}
-        <div className="max-w-3xl mx-auto mb-6 border-b border-slate-800 pb-6">
-            <FooterSearch />
-        </div>
-
-        {/* =========================================
-            Part 3: 社群、計數器、聯絡資訊
-           ========================================= */}
-        <div className="flex flex-col lg:flex-row justify-between items-end gap-6 mb-6">
+        {/* Part 1: 快速導覽 (保留您原始圖片排版樣式)*/}
+        <div className="mb-10">
+          <h3 className="text-2xl font-bold text-slate-900 text-center mb-6 tracking-wide">
+            快速導覽
+          </h3>
           
-          {/* 1. 左側：追蹤我們 + 社群按鈕 + 預約按鈕 */}
-          <div className="w-full lg:w-auto">
-            <h3 className="text-lg font-bold text-white mb-3 flex items-center h-[28px]">
-                追蹤我們
-            </h3>
-            
-            <div className="flex gap-3 items-center flex-wrap">
-                {/* 使用 React-Icons，取代原本不穩定的 <i> 標籤 */}
-                <a href="https://www.facebook.com/DrYiChen" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-blue-500/30" title="Facebook">
-                  <FaFacebookF size={18} />
-                </a>
-                <a href="https://www.instagram.com/dryichen/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-pink-500/30" title="Instagram">
-                  <FaInstagram size={18} />
-                </a>
-                <a href="https://www.threads.net/@dryichen" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-white/30" title="Threads">
-                  <SiThreads size={18} />
-                </a>
-                <a href="https://youtube.com/@dryichen" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#FF0000] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-red-500/30" title="YouTube">
-                  <FaYoutube size={20} />
-                </a>
-                
-                {/* 獨立的預約按鈕 */}
-                <Link href="/booking" className="px-4 py-1.5 rounded-full text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-rose-500 hover:shadow-[0_0_10px_rgba(236,72,153,0.5)] transition-all flex items-center gap-1.5 ml-1">
-                    <FaCalendarCheck /> 馬上預約
-                </Link>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-2 max-w-6xl mx-auto">
+        {/* 第 1 格*/}
+            <Link href="/a" className="group flex flex-col border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-slate-400 transition-all">
+              <div className="h-24 md:h-32 bg-slate-50 relative">
+                <img src="/images/footer/派大星.jpg" className="w-full h-full object-cover"  />
+              </div>
+              <div className="py-3 text-center border-t border-slate-100">
+                <span className="text-slate-800 font-bold text-sm md:text-base">派大星</span>
+              </div>
+            </Link>
+  
+
+        {/* 第 2 格 */}
+        <Link href="/b" className="group flex flex-col border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-slate-400 transition-all">
+          <div className="h-24 md:h-32 bg-slate-50 relative">
+            <img src="/images/footer/大鳳梨.jpg" className="w-full h-full object-cover"  />
+          </div>
+          <div className="py-3 text-center border-t border-slate-100">
+            <span className="text-slate-800 font-bold text-sm md:text-base">小呱</span>
+          </div>
+        </Link>
+
+        {/* 第 3 格 */}
+        <Link href="/c" className="group flex flex-col border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-slate-400 transition-all">
+          <div className="h-24 md:h-32 bg-slate-50 relative">
+            <img src="/images/footer/海綿寶寶.jpg" className="w-full h-full object-cover"  />
+          </div>
+          <div className="py-3 text-center border-t border-slate-100">
+            <span className="text-slate-800 font-bold text-sm md:text-base">蟹堡王</span>
+          </div>
+        </Link>
+
+        {/* 第 4 格 */}
+        <Link href="/d" className="group flex flex-col border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-slate-400 transition-all">
+          <div className="h-24 md:h-32 bg-slate-50 relative">
+            <img src="/images/footer/海綿寶寶.jpg" className="w-full h-full object-cover"  />
+          </div>
+          <div className="py-3 text-center border-t border-slate-100">
+            <span className="text-slate-800 font-bold text-sm md:text-base">美味蟹堡</span>
+          </div>
+        </Link>
+
+      </div>   
+    </div>
+
+        {/*    Part 2: 店家資訊區塊 */}
+        <div className="flex flex-col items-center text-center space-y-6 pt-8 border-t border-slate-50">
+          
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold tracking-tight text-slate-900">海綿寶寶</h3>
+                {/* 電話 */}
+            <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 text-slate-700">
+              <FaPhoneAlt className="text-slate-400" /> 
+              <span className="font-mono text-2xl font-extrabold">(02) 888-8888</span>
+            </div>
+              
+              {/* 地址 */}
+              <div className="flex items-center gap-2 text-slate-600">
+                <HiLocationMarker className="text-slate-400" />
+                <span className="text-lg">太平洋深海300米處</span>
+              </div>
             </div>
           </div>
 
-          {/* 2. 中間：累計瀏覽 */}
-          <div className="flex flex-col items-center justify-center w-full lg:w-auto my-4 lg:my-0">
-             <div className="bg-slate-800/80 px-6 py-3 rounded-xl border border-slate-600/50 flex items-center gap-3 shadow-[0_4px_10px_rgba(0,0,0,0.2)]">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                
-                <span className="text-sm text-slate-300 font-medium">累計瀏覽:</span>
-                
-                <span className="font-mono text-cyan-400 font-bold tracking-widest text-xl">
-                    {visitCount}
-                </span>
-             </div>
-          </div>
+          {/* 預約按鈕 */}
+          <Link 
+            href="/booking" 
+            className="px-10 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 shadow-lg active:scale-95 transition-all"
+          >
+            立即預約掛號
+          </Link>
 
-          {/* 3. 右側：診所資訊 */}
-          <div className="text-center lg:text-right text-slate-300 space-y-1.5 w-full lg:w-auto text-sm">
-          <a 
-  href="tel:+886-3-564-7999" 
-  className="flex items-center justify-center lg:justify-end gap-2 group cursor-pointer hover:text-cyan-400 transition-colors"
->
-  <FaPhoneAlt size={14} className="text-cyan-400 group-hover:animate-pulse" /> 
-  <span className="font-mono tracking-wide text-xl font-bold">(03) 564-7999</span>
-</a>
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=宸新復健科診所" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center justify-center lg:justify-end gap-2 hover:text-cyan-400 transition-colors"
-            >
-              <HiLocationMarker size={18} className="text-cyan-400" />
-              <span>300新竹市東區光復路一段371號B1</span>
-            </a>
-
-            <p className="text-xs text-slate-500 pt-1">
-                服務範圍：新竹市東區、竹科園區、關新路周邊復健服務
-            </p>
-
-            <p className="text-xs text-slate-500 pt-1">
-                如需查詢門診時間或掛號，請前往：
-                <a 
-                  href="https://www.forcestar.com.tw/clinic/%E6%96%B0%E7%AB%B9%E7%AB%B9%E7%A7%91%E5%AE%B8%E6%96%B0%E5%BE%A9%E5%81%A5%E7%A7%91%E8%A8%BA%E6%89%80/c/jvAUv7dDKT" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-cyan-500 hover:text-cyan-400 hover:underline font-medium"
-                >
-                    新竹復健科首選 - 宸新復健科診所
-                </a>
+          {/* 版權與聲明 */}
+          <div className="pt-4">
+            <p className="text-slate-400 text-xs leading-relaxed max-w-md">
+              © {new Date().getFullYear()} 海綿寶寶 專業廚師 All Rights Reserved.<br />
             </p>
           </div>
-        </div>
-
-        <div className="border-t border-slate-800 my-4"></div>
-
-        <div className="text-center">
-          <p className="text-slate-500 text-xs leading-relaxed">
-            © {new Date().getFullYear()} 宸新復健科診所 林羿辰醫師. All Rights Reserved.<br />
-            <span className="text-slate-600 block mt-1">本網站內容僅供衛教參考，不能取代專業醫師診斷。</span>
-          </p>
         </div>
 
       </div>
