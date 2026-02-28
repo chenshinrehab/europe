@@ -56,9 +56,9 @@ export default function Navigation() {
         subItems: [
             { name: '義大利深度旅遊', path: '/europe/italy' },
             { name: '瑞士優美絕境', path: '/europe/switzerland' },
-            { name: '德法經典之旅', path: '/europe/france-Germany' },
+            { name: '德法經典之旅', path: '/europe/franceGermany' },
             { name: '中歐奧捷匈巡禮', path: '/europe/centraleurope' },
-            { name: '葡西歷史巡禮', path: '/europe/ Spain-Portugal' }
+            { name: '葡西歷史巡禮', path: '/europe/spainPortugal' }
         ]
     },
   ];
@@ -126,7 +126,7 @@ export default function Navigation() {
 
       <div className="container mx-auto px-4 max-w-7xl">
         
-        {/* --- Logo 與頂部區塊 (核心修改：手機版水平並列且置中) --- */}
+        {/* --- Logo 與頂部區塊 --- */}
         <div className="flex items-center justify-center md:justify-between py-4 md:py-5 border-b border-[#F2EFE9]">
           
           <Link href="/" className="flex items-center gap-3 md:gap-4 group md:absolute md:left-1/2 md:-translate-x-1/2 z-10">
@@ -149,7 +149,7 @@ export default function Navigation() {
               </div>
           </Link>
 
-          {/* 右側社群按鈕 (電腦版保持在右側) */}
+          {/* 右側社群按鈕 */}
           <div className="hidden md:flex items-center gap-3 ml-auto z-20">
               <Link href="/" className="w-10 h-10 rounded-full bg-white text-[#8E9AAF] flex items-center justify-center hover:bg-slate-50 transition-colors border border-[#EFECE6] shadow-sm">
                 <FaHouse size={18} />
@@ -166,7 +166,7 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* --- 導覽選單 (手機版四格並排) --- */}
+        {/* --- 導覽選單 --- */}
         <nav className="py-2 md:py-3 relative">
             <ul className="flex justify-between md:justify-center items-center gap-1 md:gap-3">
               {navItems.map((item) => (
@@ -174,7 +174,7 @@ export default function Navigation() {
                     <Link 
                       href={item.path} 
                       className={`
-                        flex items-center justify-center px-1 md:px-5 py-2 text-[12px] md:text-[15px] rounded-full transition-all whitespace-nowrap tracking-tighter md:tracking-wide
+                        flex items-center justify-center px-1 md:px-5 py-2 text-[13.5px] md:text-[15px] rounded-full transition-all whitespace-nowrap tracking-tighter md:tracking-wide
                         ${isActive(item.path) 
                           ? 'text-slate-800 font-bold bg-[#F2EFE9]' 
                           : 'text-slate-500 hover:text-slate-800 hover:bg-[#F2EFE9]/50'}
@@ -205,7 +205,7 @@ export default function Navigation() {
               <li className="flex-1 md:flex-none">
                 <Link 
                   href="/booking" 
-                  className="flex items-center justify-center py-2 px-2 md:px-7 bg-[#7A9EAF] text-white rounded-full text-[12px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.15em] hover:bg-[#8E9AAF] transition-all shadow-md shadow-blue-100/50 uppercase whitespace-nowrap"
+                  className="flex items-center justify-center py-2 px-1 md:px-7 bg-[#7A9EAF] text-white rounded-full text-[13px] md:text-xs font-bold tracking-tighter md:tracking-[0.15em] hover:bg-[#8E9AAF] transition-all shadow-md shadow-blue-100/50 uppercase whitespace-nowrap"
                 >
                   立即諮詢
                 </Link>

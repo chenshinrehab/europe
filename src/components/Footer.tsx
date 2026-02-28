@@ -17,26 +17,28 @@ import { SiThreads } from "react-icons/si";
 import { HiLocationMarker } from "react-icons/hi";
 
 export default function Footer() {
-  const [visitCount, setVisitCount] = useState<string>('---,---')
+  const [visitCount, setVisitCount] = useState<string>('---')
 
   // =================================================================
-  // 瀏覽人數計算邏輯
+  // 瀏覽人數計算邏輯：從 100 開始，每天增加 19 個
   // =================================================================
   useEffect(() => {
-    const BASE_VIEWS = 12500; 
-    const VIEWS_PER_HOUR = 12;
-    const ANCHOR_DATE = new Date('2026-01-10T00:00:00').getTime();
+    const START_DATE = new Date('2026-01-01T00:00:00'); // 設定起始日期
+    const START_COUNT = 100;
+    const DAILY_INCREMENT = 19;
 
     const calculateViews = () => {
-      const now = Date.now();
-      const timeDiff = now - ANCHOR_DATE;
-      const hoursPassed = timeDiff / (1000 * 60 * 60);
-      const currentViews = Math.floor(BASE_VIEWS + (hoursPassed * VIEWS_PER_HOUR));
+      const now = new Date();
+      // 計算與起始日的天數差（含小數點以達成平滑成長感）
+      const timeDiff = now.getTime() - START_DATE.getTime();
+      const daysPassed = Math.max(0, timeDiff / (1000 * 60 * 60 * 24));
+      
+      const currentViews = Math.floor(START_COUNT + (daysPassed * DAILY_INCREMENT));
       setVisitCount(currentViews.toLocaleString());
     };
 
     calculateViews();
-    const intervalId = setInterval(calculateViews, 60000);
+    const intervalId = setInterval(calculateViews, 60000); // 每分鐘更新一次
     return () => clearInterval(intervalId);
   }, [])
 
@@ -121,8 +123,8 @@ export default function Footer() {
                 {[
                   { name: '關於服務', path: '/about', img: '/images/footer/1.webp' },
                   { name: '我們的特色', path: '/whychooseus', img: '/images/footer/2.webp' },
-                  { name: '熱門路線', path: '/europe', img: '/images/footer/route.webp' },
-                  { name: '立即預約', path: '/booking', img: '/images/footer/contact.webp' }
+                  { name: '熱門路線', path: '/europe', img: '/images/footer/3.webp' },
+                  { name: '立即預約', path: '/booking', img: '/images/footer/5.webp' }
                 ].map((item, idx) => (
                   <MotionWrapper key={idx} type="fadeInUp">
                     <Link href={item.path} className="group rounded-[2rem] relative h-36 md:h-48 overflow-hidden shadow-sm border-[6px] border-white hover:shadow-xl transition-all duration-500 block">
@@ -155,7 +157,7 @@ export default function Footer() {
             </h4>
             
             <div className="flex gap-4 items-center flex-wrap">
-            <a href="https://www.facebook.com/profile.php?id=61579679421074" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-[#1877F2] flex items-center justify-center hover:bg-blue-50 transition-colors border border-[#EFECE6] shadow-sm">
+                <a href="https://www.facebook.com/profile.php?id=61579679421074" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-[#1877F2] flex items-center justify-center hover:bg-blue-50 transition-colors border border-[#EFECE6] shadow-sm">
                   <FaFacebookF size={16} />
                 </a>
                 <a href="https://www.instagram.com/wanderthrougheurope/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white text-[#E4405F] flex items-center justify-center hover:bg-pink-50 transition-colors border border-[#EFECE6] shadow-sm">
@@ -166,16 +168,16 @@ export default function Footer() {
                 </a>
                 
                 <Link 
-  href="/booking" 
-  className="ml-2 px-8 py-3 rounded-full text-[10px] font-bold tracking-[0.2em] text-white bg-[#7A9EAF] hover:bg-[#8E9AAF] transition-all shadow-lg shadow-blue-100/50 flex items-center gap-2 uppercase"
->
-  <FaCalendarCheck size={12} /> Booking
-</Link>
+                  href="/booking" 
+                  className="ml-2 px-8 py-3 rounded-full text-[10px] font-bold tracking-[0.2em] text-white bg-[#7A9EAF] hover:bg-[#8E9AAF] transition-all shadow-lg shadow-blue-100/50 flex items-center gap-2 uppercase"
+                >
+                  <FaCalendarCheck size={12} /> Booking
+                </Link>
             </div>
           </div>
 
-          {/* 2. 中間：累計瀏覽 */}
-          <div className="flex flex-col items-center lg:items-start justify-center w-full lg:w-auto">
+          {/* 2. 中間：累計瀏覽 (從 100 開始每天加 19) */}
+          <div className="flex flex-col items-center lg:items-center justify-center w-full lg:w-auto">
              <div className="bg-white/60 backdrop-blur-sm px-6 py-3 rounded-2xl border border-white flex items-center gap-4 shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-200 opacity-75"></span>
@@ -187,49 +189,43 @@ export default function Footer() {
                 </span>
              </div>
           </div>
-     {/* 3. 右側：聯絡資訊 (純網路服務優化) */}
-     <div className="text-left lg:text-right text-slate-500 space-y-4 w-full lg:w-auto">
-            {/* LINE 官方帳號 */}
+
+          {/* 3. 右側：聯絡資訊 */}
+          <div className="text-left lg:text-right text-slate-500 space-y-4 w-full lg:w-auto">
             <a 
               href="https://line.me/R/ti/p/@261RYSIY" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center justify-start lg:justify-end gap-3 group transition-all"
             >
-           <div className="flex flex-col items-start lg:items-end gap-1">
-  {/* 主標題：優雅大氣 */}
-  <span className="font-serif italic text-2xl md:text-3xl font-bold tracking-tight text-slate-800 group-hover:text-[#7A9EAF] transition-colors duration-500">
-    Line 官方帳號
-  </span>
-  
-  {/* 副標題：帳號 ID 縮小並帶入品牌藍 */}
-  <div className="flex items-center gap-2">
-    <span className="h-[1px] w-4 bg-[#7A9EAF]/30 hidden lg:block"></span> {/* 裝飾小橫線 */}
-    <span className="text-[11px] md:text-[12px] text-[#7A9EAF] font-bold tracking-[0.25em] uppercase bg-[#7A9EAF]/5 px-2 py-0.5 rounded-sm">
-      @261RYSIY
-    </span>
-  </div>
-</div>
+              <div className="flex flex-col items-start lg:items-end gap-1">
+                <span className="font-serif italic text-2xl md:text-3xl font-bold tracking-tight text-slate-800 group-hover:text-[#7A9EAF] transition-colors duration-500">
+                  Line 官方帳號
+                </span>
+                <div className="flex items-center gap-2">
+                  <span className="h-[1px] w-4 bg-[#7A9EAF]/30 hidden lg:block"></span>
+                  <span className="text-[11px] md:text-[12px] text-[#7A9EAF] font-bold tracking-[0.25em] uppercase bg-[#7A9EAF]/5 px-2 py-0.5 rounded-sm">
+                    @261RYSIY
+                  </span>
+                </div>
+              </div>
             </a>
-            <div className="flex flex-col items-start lg:items-end gap-1 mt-6">
-  {/* 主標題：優雅大氣 */}
-  <span className="font-serif italic text-2xl md:text-3xl font-bold tracking-tight text-slate-800 transition-colors duration-500">
-    電子郵件諮詢
-  </span>
-  
-  {/* 副標題：Email 地址縮小並帶入品牌藍 */}
-  <div className="flex items-center gap-2">
-    <span className="h-[1px] w-4 bg-[#7A9EAF]/30 hidden lg:block"></span> {/* 裝飾小橫線 */}
-    <a 
-      href="mailto:jimmyforjob2@gmail.com" 
-      className="text-[11px] md:text-[12px] text-[#7A9EAF] font-bold tracking-[0.1em] lowercase bg-[#7A9EAF]/5 px-2 py-0.5 rounded-sm hover:bg-[#7A9EAF]/10 transition-all"
-    >
-      jimmyforjob2@gmail.com
-    </a>
-  </div>
-</div>
 
-            {/* 服務標語 */}
+            <div className="flex flex-col items-start lg:items-end gap-1 mt-6">
+              <span className="font-serif italic text-2xl md:text-3xl font-bold tracking-tight text-slate-800 transition-colors duration-500">
+                電子郵件諮詢
+              </span>
+              <div className="flex items-center gap-2">
+                <span className="h-[1px] w-4 bg-[#7A9EAF]/30 hidden lg:block"></span>
+                <a 
+                  href="mailto:jimmyforjob2@gmail.com" 
+                  className="text-[11px] md:text-[12px] text-[#7A9EAF] font-bold tracking-[0.1em] lowercase bg-[#7A9EAF]/5 px-2 py-0.5 rounded-sm hover:bg-[#7A9EAF]/10 transition-all"
+                >
+                  jimmyforjob2@gmail.com
+                </a>
+              </div>
+            </div>
+
             <p className="text-[10px] text-slate-400 tracking-wider">
               Bespoke Chauffeur Service in Europe. <br className="md:hidden" />
               Tailored Journeys, Unmatched Comfort.
@@ -242,7 +238,7 @@ export default function Footer() {
         {/* --- 版權聲明 --- */}
         <MotionWrapper type="fadeInUp" className="text-center">
           <p className="text-slate-300 text-[9px] leading-loose tracking-[0.4em] uppercase">
-            © {new Date().getFullYear()} WanderThroughEurope  . <br />
+            © {new Date().getFullYear()} WanderThroughEurope . <br />
           </p>
         </MotionWrapper>
       </div>
