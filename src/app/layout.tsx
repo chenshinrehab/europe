@@ -22,11 +22,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: '海綿寶寶',
+    default: '歐洲漫行-旅遊規劃師',
     // 這樣你在分頁設定 title: '蟹堡王' 時，瀏覽器分頁會顯示 '蟹堡王 | 海綿寶寶'
-    template: '%s | 海綿寶寶'
+    template: '%s | 歐洲漫行-旅遊規劃師'
   },
-  description: '深海的大鳳梨',
+  description: '在地華人經營，訂製旅遊包車服務 義大利、奧捷匈、瑞士、德法、西葡',
   icons: {
     icon: '/favicon.svg',
   },
