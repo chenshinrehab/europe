@@ -94,11 +94,11 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ 
                       opacity: 1,
-                      transition: { duration: 2.5, ease: "easeOut" } // 🟢 出現速度變慢 (輕柔浮現)
+                      transition: { duration: 2.5, ease: "easeOut" } // 🟢 出現速度變慢 (輕柔   浮現)
                     }}
                     exit={{ 
                       opacity: 0,
-                      transition: { duration: 1.0, ease: "easeIn" }  // 🟢 消失速度變快 (俐落退場)
+                      transition: { duration: 1.0, ease: "easeIn" }  // 🟢 消失速 度變快 (俐落退場)
                     }}
                     className="relative w-full h-full"
                   >
