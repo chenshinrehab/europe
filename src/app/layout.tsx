@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import BackgroundMusic from '@/components/BackgroundMusic' // 💡 引入音樂組件
+
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -45,8 +45,6 @@ export default function RootLayout({
             {children}
         </main>
         
-        {/* 🟢 背景音樂組件：放在 body 內，確保跨頁面不中斷 */}
-        <BackgroundMusic />
         
         <Footer />
       </body>
