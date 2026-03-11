@@ -46,30 +46,72 @@ export default function Home() {
     : currentCountry.image;
   // --- 🔴 邏輯結束 ---
 
-  const jsonLdData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness", 
-    "name": "Elegant Europe 優雅歐洲包車",
-    "image": "https://yourdomain.com/hero-image.webp",
-    "url": "https://yourdomain.com",
-    "telephone": "+886-975-665-786",
-    "priceRange": "TWD",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "TW",
-      "addressRegion": "Taiwan"
+  const jsonLdData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness", 
+      "name": "Elegant Europe 優雅歐洲包車",
+      "image": "https://europe-navy.vercel.app/hero-image.webp",
+      "url": "https://europe-navy.vercel.app",
+      "telephone": "+886-975-665-786",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Elegant Europe 優雅歐洲包車"
+      },
+      "priceRange": "TWD",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "TW",
+        "addressRegion": "Taiwan"
+      },
+      "sameAs": ["https://line.me/R/ti/p/@261RYSIY"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "jimmyforjob2@gmail.com",
+        "availableLanguage": ["Chinese", "English"]
+      },
+
+      "dateModified": new Date().toISOString().split('T')[0]
     },
-    "sameAs": ["https://line.me/R/ti/p/@261RYSIY"],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer service",
-      "email": "jimmyforjob2@gmail.com",
-      "availableLanguage": ["Chinese", "English"]
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "需要提早多久預約？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議在出發前兩個月與我們聯繫，我們會為您量身規劃行程。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "費用包含司導食宿嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，報價已包含司導住宿與餐飲費用，無隱藏消費。"
+          }
+        }
+      ]
     }
-  };
+  ];
 
   return (
     <div className="min-h-screen bg-[#FDFCF9] text-slate-600 pb-20 relative overflow-x-hidden font-light bg-[url('/images/bg/linen-texture.png')] bg-repeat bg-center">
+      {/* --- SEO Meta Tags --- */}
+      {/* 將 title 擴充至超過 65 個字元，加入更多高價值關鍵字 */}
+      <title>Elegant Europe 優雅歐洲包車 | 專為您量身打造的客製化私人豪華旅遊行程規劃，提供專業華語司導與頂級商務車隊</title>
+      <meta name="description" content="專為您量身打造的歐洲包車客製化旅遊，提供專屬華語司機與豪華車隊，從機場接送到跨國長途，不趕路只感受。每天只要650歐元起，立即預約您的優雅歐洲假期。" />
+      <meta name="keywords" content="歐洲包車, 歐洲旅遊, 歐洲自由行, 歐洲客製化行程, 歐洲華語司機, 歐洲包車推薦, 歐洲長途接送" />
+      <link rel="canonical" href="https://europe-navy.vercel.app" />
+      <meta property="og:title" content="Elegant Europe 優雅歐洲包車 | 專為您量身打造的客製化私人豪華旅遊行程規劃，提供專業華語司導與頂級商務車隊" />
+      <meta property="og:description" content="專為您量身打造的歐洲包車客製化旅遊，提供專屬華語司機與豪華車隊，從機場接送到跨國長途，不趕路只感受。每天只要650歐元起，立即預約您的優雅歐洲假期。" />
+      <meta property="og:image" content="https://europe-navy.vercel.app/images/og-image.webp" />
+      <meta property="og:url" content="https://europe-navy.vercel.app" />
+      <meta property="article:publisher" content="Elegant Europe 優雅歐洲包車" />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
@@ -94,11 +136,11 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ 
                       opacity: 1,
-                      transition: { duration: 2.5, ease: "easeOut" } // 🟢 出現速度變慢 (輕柔   浮現)
+                      transition: { duration: 2.5, ease: "easeOut" } // 🟢 出現速度變慢 (輕柔浮現)
                     }}
                     exit={{ 
                       opacity: 0,
-                      transition: { duration: 1.0, ease: "easeIn" }  // 🟢 消失速 度變快 (俐落退場)
+                      transition: { duration: 1.0, ease: "easeIn" }  // 🟢 消失速度變快 (俐落退場)
                     }}
                     className="relative w-full h-full"
                   >
@@ -258,17 +300,16 @@ export default function Home() {
       </main>
 
       {/* --- 懸浮諮詢按鈕 --- */}
-{/* --- 懸浮諮詢按鈕 --- */}
-<MotionWrapper type="scale" delay={1} className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 group">
-  <a 
-    href="https://line.me/R/ti/p/@261RYSIY" 
-    target="_blank" rel="noopener noreferrer"
-    className="bg-[#06C755] text-white w-14 h-14 md:w-20 md:h-20 rounded-full shadow-2xl shadow-[#06C755]/20 hover:scale-110 active:scale-90 transition-all flex items-center justify-center border-4 border-white"
-  >
-    {/* 手機版圖示 28px，電腦版 36px */}
-    <FaCommentDots className="text-[28px] md:text-[36px]" />
-  </a>
-</MotionWrapper>
+      <MotionWrapper type="scale" delay={1} className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 group">
+        <a 
+          href="https://line.me/R/ti/p/@261RYSIY" 
+          target="_blank" rel="noopener noreferrer"
+          className="bg-[#06C755] text-white w-14 h-14 md:w-20 md:h-20 rounded-full shadow-2xl shadow-[#06C755]/20 hover:scale-110 active:scale-90 transition-all flex items-center justify-center border-4 border-white"
+        >
+          {/* 手機版圖示 28px，電腦版 36px */}
+          <FaCommentDots className="text-[28px] md:text-[36px]" />
+        </a>
+      </MotionWrapper>
     </div>
   );
 }

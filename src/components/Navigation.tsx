@@ -143,7 +143,7 @@ export default function Navigation() {
                   歐洲漫行-旅遊規劃師
                 </div>
                 <p className="text-[10px] md:text-[13px] text-slate-600 tracking-[0.1em] md:tracking-[0.3em] uppercase mt-1 md:mt-2 font-bold font-serif italic whitespace-nowrap">
-                  義大利 奧捷匈 瑞士 德法 西葡
+                  義大利 奧捷匈 瑞士 德法 
                 </p>
               </div>
           </Link>
